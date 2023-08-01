@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Recommender System</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        background-color: #fff;
+        color: #333;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .navbar {
+        background-color: #00897b;
+        color: white;
+        border-radius: 0;
+        border: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar-brand {
+        font-size: 28px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar-nav > li > a {
+        font-size: 18px;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav > li > a:hover {
+        color: #ffc107;
+    }
+
+    .container {
+        padding-top: 30px;
+    }
+
+    h1 {
+        font-size: 36px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    form {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+        width: 300px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+    input[type="submit"] {
+        background-color: #00897b;
+        color: white;
+        font-size: 18px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .col-md-3 {
+        flex: 0 0 calc(25% - 20px);
+        margin-bottom: 20px;
+    }
+
+    .card {
+        background-color: #fff;
+        border: 1px solid #e1e1e1;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+        height: 100%;
+    }
+
+    .card:hover {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .card img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+
+    .card p, .card h4 {
+        margin-bottom: 5px;
+    }
+</style>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/">My Book Recommender</a>
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/recommend">Recommend</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Recommend Books</h1>
+                <div class="search-container">
+                    <form action="/recommend_books" method="post">
+                        <input name="user_input" type="text" class="form-control" placeholder="Enter your query">
+                        <input type="submit" class="btn btn-lg btn-warning" value="Recommend">
+                    </form>
+                </div>
+            </div>
+
+            {% if data %}
+                {% for i in data %}
+                    <div class="col-md-3">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ i[2] }}" alt="Book Image">
+                            <p>{{ i[0] }}</p>
+                            <h4>{{ i[1] }}</h4>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+</html>
